@@ -34,10 +34,13 @@ public class PinCodeParser{
                     JsonObject convertedObject = new Gson().fromJson(String.valueOf(content), JsonObject.class);
                     JsonArray postOffice = convertedObject.getAsJsonArray("PostOffice");
                     JsonObject fPostOffice =(JsonObject) postOffice.get(0);
-                    System.out.println(pin+"-"+fPostOffice.get("Name"));
+                    System.out.print("\n"+pin+"-"+fPostOffice.get("Name")+" Taluk- "+fPostOffice.get("Taluk"));
                 }
                 catch(Exception e){
-                    System.out.println(e);
+                    if(e instanceof ClassCastException)
+                        System.out.print("\n"+pin+"- Post Office not found");
+                    else
+                        System.out.println(e);
                 }
             }
         }catch(Exception e){
